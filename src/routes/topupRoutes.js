@@ -2,6 +2,7 @@ import express from 'express';
 import { TopUp } from '../modals/topupModal.js';
 
 const TopUpRouter = express.Router();
+//To update any amount to database
 TopUpRouter.post('/', async (request, response) => {
     try {
         if (
@@ -26,4 +27,23 @@ TopUpRouter.post('/', async (request, response) => {
     }
 
 })
+
+
+//Route for fetch data from database
+TopUpRouter.get('/', async (request, response) => {
+
+    try {
+        const amount = await TopUp.find({});
+        return response.status(200).json({
+            status: 200,
+            count: amount.length,
+            data: amount,
+
+        })
+
+    } catch (error) {
+        console.log(error.message);
+        response.status(500).send({ message: error.message })
+    }
+});
 export default TopUpRouter;
