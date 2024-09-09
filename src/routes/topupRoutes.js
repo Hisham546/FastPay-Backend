@@ -4,6 +4,12 @@ import { TopUp } from '../modals/topupModal.js';
 const TopUpRouter = express.Router();
 //To update any amount to database
 TopUpRouter.post('/', async (request, response) => {
+    console.log('Request received:', {
+        body: request.body,
+        headers: request.headers,
+        method: request.method,
+        url: request.url
+    });
     try {
         if (
             !request.body.amount
@@ -13,7 +19,7 @@ TopUpRouter.post('/', async (request, response) => {
                 message: 'Send all required fields'
             });
         }
-        
+
         const newAmount = {
 
             amount: request.body.amount,

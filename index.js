@@ -2,7 +2,14 @@ import express from "express";
 import { PORT, mongoDBURL } from "./src/config.js";
 import mongoose from 'mongoose';
 import TopUpRouter from "./src/routes/topupROutes.js";
+import cors from "cors";
 const app = express();
+
+// Use CORS middleware
+app.use(cors());
+
+// Add middleware to parse urlencoded bodies (form data)
+app.use(express.urlencoded({ extended: true }));
 //Middleware for parsing request body
 app.use(express.json());
 
